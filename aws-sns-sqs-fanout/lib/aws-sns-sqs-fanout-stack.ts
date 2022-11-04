@@ -12,21 +12,42 @@ export class AwsSnsSqsFanoutStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const highPriorityQueue = this.createQueue(
-      "HighPriority",
-      join(__dirname, "..", "lambdas", "high-priority.ts")
+    const analyticsQueue = this.createQueue(
+      "Analytics",
+      join(__dirname, "..", "lambdas", "analytics.ts")
     );
-    const lowPriorityQueue = this.createQueue(
-      "LowPriority",
-      join(__dirname, "..", "lambdas", "low-priority.ts")
+    const confirmationEmailQueue = this.createQueue(
+      "ConfirmationEmail",
+      join(__dirname, "..", "lambdas", "confirmation-email.ts")
+    );
+    const confirmationSMSQueue = this.createQueue(
+      "ConfirmationSMS",
+      join(__dirname, "..", "lambdas", "confirmation-sms.ts")
     );
 
     const topic = new sns.Topic(this, "Topic", {
       displayName: "Subscription topic",
     });
 
-    topic.addSubscription(new subscriptions.SqsSubscription(highPriorityQueue));
-    topic.addSubscription(new subscriptions.SqsSubscription(lowPriorityQueue));
+    topic.addSubscription(new subscriptions.SqsSubscription(analyticsQueue));
+    topic.addSubscription(
+      new subscriptions.SqsSubscription(confirmationEmailQueue, {
+        filterPolicy: {
+          confirmationType: sns.SubscriptionFilter.stringFilter({
+            allowlist: ["EMAIL"],
+          }),
+        },
+      })
+    );
+    topic.addSubscription(
+      new subscriptions.SqsSubscription(confirmationSMSQueue, {
+        filterPolicy: {
+          confirmationType: sns.SubscriptionFilter.stringFilter({
+            allowlist: ["SMS"],
+          }),
+        },
+      })
+    );
   }
 
   private createQueue(name: string, lambdaPath: string): sqs.IQueue {

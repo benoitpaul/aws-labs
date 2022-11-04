@@ -7,13 +7,13 @@ export const handler: SQSHandler = async (event, context) => {
   const batchItemFailures: SQSBatchItemFailure[] = [];
   event.Records.forEach((record) => {
     try {
-      console.log("Low Priority Record: %j", record);
+      console.log("Confirmation SMS Record: %j", record);
       const body = JSON.parse(record.body) as {
         Subject: string;
         Message: string;
       };
       const message = { subject: body.Subject, message: body.Message };
-      console.log("Low Priority Message: %j", message);
+      console.log("Confirmation SMS Message: %j", message);
     } catch {
       batchItemFailures.push({ itemIdentifier: record.messageId });
     }
