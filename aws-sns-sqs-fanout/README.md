@@ -1,6 +1,11 @@
-# AWS fan-out patter, with SNS, SQS, Typescript lambda and dead-letter queue
+# AWS fan-out pattern, with SNS, SQS, Typescript lambda and dead-letter queue
 
-This demo showcases a cloudfront distribution with an S3 origin.
+This demo showcases a fan-out pattern with AWS services:
+
+- SNS
+- SQS
+- Lambda
+- CDK (TypeScript)
 
 ![Architecture](https://github.com/benoitpaul/aws-labs/raw/main/aws-sns-sqs-fanout/Architecture.png)
 
