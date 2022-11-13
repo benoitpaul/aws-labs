@@ -1,14 +1,7 @@
-# Welcome to your CDK TypeScript project
+# AWS fan-out patter, with SNS, SQS, Typescript lambda and dead-letter queue
 
-This is a blank project for CDK development with TypeScript.
+This demo showcases a cloudfront distribution with an S3 origin.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+![Architecture](https://github.com/benoitpaul/aws-labs/raw/main/aws-sns-sqs-fanout/Architecture.png)
 
-## Useful commands
-
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+Blog post available at: [https://www.benoitpaul.com/aws/sns-sqs-fanout/](https://www.benoitpaul.com/aws/sns-sqs-fanout/)
