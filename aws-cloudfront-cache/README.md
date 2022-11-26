@@ -11,3 +11,5 @@ In order to set a custom cache policy per object, you can set its `Cache-Control
 ```
 cacheControl: [s3deploy.CacheControl.maxAge(cdk.Duration.minutes(1))]
 ```
+
+Blog post available at: [https://www.benoitpaul.com/blog/aws/cloudfront-cache/](https://www.benoitpaul.com/blog/aws/cloudfront-cache/)

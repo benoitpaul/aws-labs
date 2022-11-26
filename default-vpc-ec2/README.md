@@ -9,4 +9,4 @@ The security groups allows inbound traffic from:
 
 ![Architecture](https://github.com/benoitpaul/aws-labs/raw/main/default-vpc-ec2/Architecture.png)
 
-Blog post available at: [https://www.benoitpaul.com/aws/default-vpc-ec2/](https://www.benoitpaul.com/aws/default-vpc-ec2/)
+Blog post available at: [https://www.benoitpaul.com/blog/aws/default-vpc-ec2/](https://www.benoitpaul.com/blog/aws/default-vpc-ec2/)
