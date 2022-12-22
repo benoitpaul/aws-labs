@@ -5,5 +5,4 @@ module.exports = {
   testEnvironment: "node",
   roots: ["<rootDir>/test/integration"],
   globalSetup: "<rootDir>/test/integration/globalSetup.ts",
-  setupFiles: ["<rootDir>/test/integration/setupFile.ts"],
 };
