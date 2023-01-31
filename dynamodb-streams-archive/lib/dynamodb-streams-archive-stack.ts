@@ -49,21 +49,6 @@ export class DynamodbStreamsArchiveStack extends cdk.Stack {
 
     archiveBucket.grantWrite(firehoseRole);
 
-    /**
-     * A CloudWatch log group and stream written to when there are failures experienced by the delivery stream.
-     */
-    const logGroup = new logs.LogGroup(this, `DeliveryStreamLogGroup`, {
-      logGroupName: `/aws/kinesisfirehose/TTL-Archive`,
-      retention: logs.RetentionDays.TWO_WEEKS,
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-    });
-
-    const logStream = new logs.LogStream(this, `DeliveryStreamLogStream`, {
-      logGroup: logGroup,
-      logStreamName: "TTL-Archive",
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-    });
-
     const firehoseStreamToS3 = new kinesisfirehose.CfnDeliveryStream(
       this,
       "FirehoseStreamToS3",
@@ -83,11 +68,6 @@ export class DynamodbStreamsArchiveStack extends cdk.Stack {
 
           prefix: "raw/",
           roleArn: firehoseRole.roleArn,
-          cloudWatchLoggingOptions: {
-            enabled: true,
-            logGroupName: logGroup.logGroupName,
-            logStreamName: logStream.logStreamName,
-          },
         },
       }
     );
@@ -124,17 +104,6 @@ export class DynamodbStreamsArchiveStack extends cdk.Stack {
               principalId: lambda.FilterRule.isEqual("dynamodb.amazonaws.com"),
             },
           }),
-          /*
-          {
-            Pattern: JSON.stringify({
-              userIdentity: {
-                type: ["Service"],
-                principalId: ["dynamodb.amazonaws.com"],
-              },
-              eventName: ["REMOVE"],
-            }),
-          },
-          */
         ],
       })
     );
