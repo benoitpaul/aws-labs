@@ -1,5 +1,5 @@
 aws dynamodb put-item \
-    --table-name DynamodbStreamsStack-InvoiceTransactions95D2E648-QKIMMW1D1XUP \
+    --table-name InvoiceTransactions \
     --item '{
       "InvoiceNumber": { "S": "ABC" },
       "TransactionId": { "S": "123" },
@@ -14,7 +14,7 @@ aws dynamodb put-item \
   }'
 
   aws dynamodb put-item \
-    --table-name DynamodbStreamsStack-InvoiceTransactions95D2E648-QKIMMW1D1XUP \
+    --table-name InvoiceTransactions \
     --item '{
       "InvoiceNumber": { "S": "ABC" },
       "TransactionId": { "S": "456" },
