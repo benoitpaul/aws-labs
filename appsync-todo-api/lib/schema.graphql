@@ -1,0 +1,32 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  todos(limit: Int, nextToken: String): ToDoPage!
+}
+
+type Mutation {
+  addTodo(newToDo: ToDoInput!): ToDo!
+  addTodoWithId(id: ID!, newToDo: ToDoInput!): ToDo!
+  completeTodo(id: String!): ToDo!
+  deleteTodo(id: String!): Boolean!
+}
+
+type ToDo {
+  id: ID!
+  name: String!
+  description: String!
+  completed: Boolean!
+}
+
+type ToDoPage {
+  items: [ToDo!]
+  nextToken: String
+}
+
+input ToDoInput {
+  name: String!
+  description: String!
+}
